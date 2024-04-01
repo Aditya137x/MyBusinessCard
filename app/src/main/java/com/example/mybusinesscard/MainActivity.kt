@@ -1,5 +1,6 @@
 package com.example.mybusinesscard
 
+import android.media.Image
 import android.os.Bundle
 import android.text.style.BackgroundColorSpan
 import androidx.activity.ComponentActivity
@@ -9,6 +10,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+//import androidx.compose.foundation.layout.FlowRowScopeInstance.align
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,8 +21,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -47,7 +52,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CardLayout(name: String, career: String, modifier: Modifier = Modifier) {
-    val image = painterResource(R.drawable.android_logo)
+    val image = painterResource(R.drawable.android_logo);
+    val dial = painterResource(R.drawable.dialer_icon_8);
+    val share = painterResource(R.drawable.share_png49);
+    val mail = painterResource(R.drawable.email_icon_png_email_icon_2048);
 
 
 
@@ -55,7 +63,11 @@ fun CardLayout(name: String, career: String, modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.Center,
             modifier = modifier
         ) {
-            Box(modifier = Modifier.background(color = Color(0xFF11373f)) .size(100.dp, 100.dp) .align(Alignment.CenterHorizontally))  {
+            Box(modifier = Modifier.size(150.dp))
+            Box(modifier = Modifier
+                .background(color = Color(0xFF11373f))
+                .size(100.dp, 100.dp)
+                .align(Alignment.CenterHorizontally))  {
 
                 Image(
                 painter = image,
@@ -65,23 +77,76 @@ fun CardLayout(name: String, career: String, modifier: Modifier = Modifier) {
             )}
             Text(
                 text = name,
-                fontSize = 40.sp,
+                fontSize = 35.sp,
                 lineHeight = 110.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
-                        .padding(10.dp)
-                        .align(alignment = Alignment.CenterHorizontally)
+                    .padding(10.dp)
+                    .align(alignment = Alignment.CenterHorizontally)
             )
             Text(
                 text = career,
-                fontSize = 20.sp,
+                fontSize = 16.sp,
+                color = Color(0xFF11373f),
                 modifier = Modifier
-                    .padding(5.dp)
+                    //.padding(5.dp)
                     .align(alignment = Alignment.CenterHorizontally)
             )
+
+            Box(modifier = Modifier.size(250.dp))
+
+            DisplayText("+91 8638273828", dial, modifier = Modifier
+                .padding(5.dp)
+                .alpha(0.8F)
+                //.align(alignment = Alignment.CenterHorizontally)
+            )
+
+            DisplayText("@aditya",share, modifier = Modifier
+                .padding(5.dp)
+                .alpha(0.8F)
+                //.align(alignment = Alignment.CenterHorizontally)
+            )
+
+            DisplayText("aditya@email.com", mail, modifier = Modifier
+                .padding(5.dp)
+                .alpha(0.8F)
+                //.align(alignment = Alignment.CenterHorizontally)
+            )
+
+
         }
 
 }
+
+@Composable
+fun DisplayText(content: String, icon1: Painter, modifier: Modifier = Modifier) {
+
+
+
+        Row(horizontalArrangement = Arrangement.Center, modifier = modifier){
+            Box(modifier = Modifier.size(100.dp,20.dp))
+            Image(
+                painter = icon1,
+                contentDescription = null,
+                Modifier.size(20.dp)
+            )
+
+            Text(
+                text = content,
+                fontSize = 12.sp,
+                lineHeight = 110.sp,
+                textAlign = TextAlign.Center,
+
+                modifier = Modifier
+                    .padding(20.dp,0.dp,0.dp,0.dp)
+                    //.align(alignment = Alignment.CenterHorizontally)
+            )
+        }
+
+
+
+}
+
 
 @Preview(showBackground = true)
 @Composable
