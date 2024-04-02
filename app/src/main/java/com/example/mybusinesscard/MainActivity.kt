@@ -123,8 +123,8 @@ fun DisplayText(content: String, icon1: Painter, modifier: Modifier = Modifier) 
 
 
 
-        Row(horizontalArrangement = Arrangement.Center, modifier = modifier){
-            Box(modifier = Modifier.size(100.dp,20.dp))
+        Row(horizontalArrangement = Arrangement.Center, modifier = modifier.padding(horizontal = 100.dp)){
+            //Box(modifier = Modifier.size(100.dp,20.dp))
             Image(
                 painter = icon1,
                 contentDescription = null,
